@@ -1,0 +1,52 @@
+<div class="container">
+    <h1 class="Registration_title" style="text-align: center;" *ngIf="addMode">Create New</h1>
+    <h1 class="Registration_title" style="text-align: center;" *ngIf="!addMode">Edit</h1>
+
+    <form  [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <!-- firstname -->
+        <div class="form-group">
+            <label for="ffirstname">Firstname </label>
+            <input type="text" id="firstname" formControlName="firstname" [(ngModel)]="user.firstname"
+                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+            <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                <div *ngIf="f.firstname.errors.required">firstname is required</div>
+            </div>
+        </div>
+
+        <!-- lastname -->
+        <div class="form-group">
+            <label for="lastname">Lastname</label>
+            <input type="text" ng-model="input" id="lastname" [(ngModel)]="user.lastname" formControlName="lastname"
+                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
+            <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                <div *ngIf="f.lastname.errors.required">lastname is required</div>
+            </div>
+        </div>
+
+        <!-- email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" formControlName="email"  [(ngModel)]="user.email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Role</label>
+            <select formControlName="role" [(ngModel)]="user.role" class="form-control">
+                <option disabled>Select Role</option>
+                <option value="Artist">Artist</option>
+                <option value="Designer">Designer</option>
+                <option value="Art Manager">Art Manager</option>
+            </select>
+            <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                <div *ngIf="f.role.errors.required">Role is required</div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary registerbtn">Submit</button> &nbsp;
+        <button type="submit" class="btn btn-secondary" routerLink="/">Cancel</button>
+    </form>
+</div>

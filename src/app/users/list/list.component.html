@@ -1,0 +1,50 @@
+<div class="container">
+    <h1>Users</h1>
+    <div class="row">
+        <div class="col-sm">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">Role</span>
+                    </div>
+                    <select [(ngModel)]="role" class="form-control" (change)="onFilter($event)">
+                        <option value="All">All</option>
+                        <option value="Artist">Artist</option>
+                        <option value="Designer">Designer</option>
+                        <option value="Art Manager">Art Manager</option>
+                    </select>
+                  </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <input type="text" class="form-control" placeholder="Search.." [(ngModel)]="searchText" autocomplete="off"/>
+        </div>
+      </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Role</th>                            
+                <th>
+                    <button type="button" class="btn btn-primary" routerLink="/create">Add New</button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users| filter : searchText:'email' ; let i = index ">
+                <td [ngClass]="user.role">{{i+ 1}}</td>
+                <td [ngClass]="user.role">{{user.firstname}}</td>
+                <td [ngClass]="user.role">{{user.lastname}}</td>
+                <td [ngClass]="user.role">{{user.email}}</td>
+                <td [ngClass]="user.role">{{user.role}}</td>
+                <td [ngClass]="user.role">
+                    <button type="button" class="btn" title="Edit" [routerLink]="['/update/', user._id]"><i class="fas fa-edit"></i></button> &nbsp;
+                    <button type="button" class="btn" title="Delete" (click)="onDelete(user)"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
